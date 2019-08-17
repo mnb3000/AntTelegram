@@ -2,7 +2,7 @@ import * as Telegram from 'node-telegram-bot-api';
 
 
 export interface AntTelegramConfig {
-    getStatus: (chat_id: number) => Promise<string>;
+    getStatus: (chat_id: number) => Promise<string | undefined | null>;
     setStatus: (chat_id: number, status: string) => Promise<any>;
     maskSeparator?: string;
     useWebhook?: boolean;
