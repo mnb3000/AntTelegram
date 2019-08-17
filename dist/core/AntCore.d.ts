@@ -12,7 +12,7 @@ export declare class AntCore extends EventEmitter {
     protected liveLocationListeners: Function[];
     constructor(token: string, config: T.AntTelegramConfig);
     command(command: string, method: T.CommandCallback): void;
-    status(chat_id: Number, status: String): Promise<any>;
+    status(chat_id: number, status: string): Promise<any>;
     on(event: T.AntTelegramEvent, listener: (...args: any[]) => void): any;
     private init;
     private addListeners;

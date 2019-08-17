@@ -9,13 +9,13 @@ import { CommandParser } from '../utils/CommandParser';
 
 
 export class AntCore extends EventEmitter {
-    
+
     public api: Telegram;
     public Types = AntTypes;
 
     private config: T.AntTelegramConfig;
 
-    
+
     protected botListeners: T.Listeners = {};
     protected commands: T.Commands = {};
     protected liveLocationListeners: Function[] = [];
@@ -23,10 +23,10 @@ export class AntCore extends EventEmitter {
 
     constructor(token: string, config: T.AntTelegramConfig) {
         super();
-        
+
         if (!config.getStatus) throw new Error('Ant: config.getStatus not provided! This field is mandatory.');
         if (!config.setStatus) throw new Error('Ant: config.setStatus not provided! This field is mandatory.');
-        config.maskSeparator = config.maskSeparator || ':'; 
+        config.maskSeparator = config.maskSeparator || ':';
         config.useWebhook    = config.useWebhook || false;
         this.config = config;
 
@@ -54,7 +54,7 @@ export class AntCore extends EventEmitter {
         this.commands[command] = method;
     }
 
-    public status(chat_id: Number, status: String): Promise<any> {
+    public status(chat_id: number, status: string): Promise<any> {
         return this.config.setStatus(chat_id, status);
     }
 
@@ -73,11 +73,11 @@ export class AntCore extends EventEmitter {
             if (!message.text) return;
             const text      = message.text;
             const chatId    = message.chat.id;
-            const messageId = message.message_id; 
+            const messageId = message.message_id;
 
             const command = text.indexOf('?') !== -1 ?
                 text.slice(0, text.indexOf('?')) : text;
-    
+
             if (Object.keys(this.commands).includes(command)) {
                 this.commands[command](chatId, CommandParser.parse(text), message);
                 return;
@@ -102,8 +102,8 @@ export class AntCore extends EventEmitter {
         });
         this.api.on('inline_query', (query: Telegram.InlineQuery) => {
             this.checkStatus(query.from.id, 'inline_query', query.query);
-        })
-        this.api.on('edited_message', (message: Telegram.Message) => { 
+        });
+        this.api.on('edited_message', (message: Telegram.Message) => {
             if (message.location) {
                 this.liveLocationHandler(message);
             } else {
@@ -118,7 +118,7 @@ export class AntCore extends EventEmitter {
             'left_chat_member','migrate_from_chat_id','migrate_to_chat_id','new_chat_members',
             'new_chat_photo','new_chat_title','passport_data','pinned_message','supergroup_chat_created',
             'edited_message_text', 'edited_message_caption', 'shipping_query',
-        ]; 
+        ];
         types.forEach((type: any) => {
             this.api.on(type, (message: Telegram.Message) => {
                 const chatId = message.chat ? message.chat.id : message.from.id;
@@ -141,12 +141,12 @@ export class AntCore extends EventEmitter {
         }, this);
     }
 
-    private checkStatus(chat_id: Number, type: string, data: any, extra?: any) {
+    private checkStatus(chat_id: number, type: string, data: any, extra?: any) {
         this.config.getStatus(chat_id)
         .then(status => {
             if (!status) return;
 
-            this.botListeners[type] = this.botListeners[type] || {}; 
+            this.botListeners[type] = this.botListeners[type] || {};
             if (Object.keys(this.botListeners[type]).includes(status)) {
                 return this.botListeners[type][status](chat_id, data, extra);
             } else {
@@ -166,18 +166,18 @@ export class AntCore extends EventEmitter {
         this.liveLocationListeners.forEach((listener: T.ListenerCallback) => {
             return listener(chatId, message.location);
         }, this);
-    } 
+    }
 
-    private onError(id: String | Number, err: Error) {
+    private onError(id: string | number, err: Error) {
         this.emit('chat_error', id, err);
         this.emit('Error', Object.assign(err, { chat_id: id }));
     }
 
-    private isMask(mask: String): Boolean {
+    private isMask(mask: string): boolean {
         return mask.split(this.config.maskSeparator).includes('*');
     }
 
-    private isMatch(status: String, mask: String) {
+    private isMatch(status: string, mask: string) {
         if (mask === '*') return status;
 
         const statusLevels = status.split(this.config.maskSeparator);

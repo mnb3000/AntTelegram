@@ -8,8 +8,11 @@
     "noImplicitAny": true,
     "removeComments": true,
     "outDir": "dist",
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   },
   "include": ["lib/**/*"],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

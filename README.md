@@ -56,8 +56,8 @@ About:
 Ant:Telegram require to provide 2 basic status managment async methods: for getting status to user by telegram `chat_id`, and for setting it.  
 Feel free to chose storing way (architecture, database etc.). We require next interfaces only:
 ```ts
-getStatus(chat_id: Number): Promise<String>;
-setStatus(chat_id: Number, status: String): Promise<any>;
+getStatus(chat_id: number): Promise<string>;
+setStatus(chat_id: number, status: string): Promise<any>;
 ``` 
 
 Just put in on Ant:Telegram initialization with [telegram bot token](https://core.telegram.org/bots#3-how-do-i-create-a-bot):
@@ -95,8 +95,8 @@ See `Ant.api`
 
 All api methods like 
 ```ts
-Ant.api.sendMessage(chat_id: Number, text: String, options? TelegramOptions): Promise;
-Ant.api.deleteChatStickerSet(chat_id: Number, form: TelegramForm): Promise;
+Ant.api.sendMessage(chat_id: number, text: string, options? TelegramOptions): Promise;
+Ant.api.deleteChatStickerSet(chat_id: number, form: TelegramForm): Promise;
 ``` 
 ... and so on. See full list in [node-telegram-bot-api](https://www.npmjs.com/package/node-telegram-bot-api) dependency.
 

@@ -1,8 +1,9 @@
 {
-  "name": "ant-telegram",
-  "version": "0.1.0",
-  "description": "AntTelegram: small but poweful framework for telegram bots.",
-  "main": "dist/index.js",
+  "name": "ant-telegram-type-fix",
+  "version": "0.1.2",
+  "description": "AntTelegram: small but powerful framework for telegram bots.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
@@ -12,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Xeelley/AntTelegram.git"
+    "url": "git+https://github.com/mnb3000/AntTelegram.git"
   },
   "keywords": [
     "telegram",
@@ -23,14 +24,15 @@
   "author": "Xeelley",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Xeelley/AntTelegram/issues"
+    "url": "https://github.com/mnb3000/AntTelegram/issues"
   },
-  "homepage": "https://github.com/Xeelley/AntTelegram#readme",
+  "homepage": "https://github.com/mnb3000/AntTelegram#readme",
   "dependencies": {
     "node-telegram-bot-api": "^0.30.0"
   },
   "devDependencies": {
     "@types/node": "^11.13.6",
-    "@types/node-telegram-bot-api": "^0.30.4"
+    "@types/node-telegram-bot-api": "^0.30.4",
+    "typescript": "^3.5.3"
   }
 }

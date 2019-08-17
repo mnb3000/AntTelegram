@@ -9,12 +9,12 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema({
     user_id: {
-        type: Number,
+        type: number,
         require: true,
         unique: true,
     },
     status: {
-        type: String,
+        type: string,
     },
 }, { collection: 'statuses' });
 

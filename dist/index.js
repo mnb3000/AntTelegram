@@ -27,7 +27,7 @@ var AntTelegram = (function (_super) {
         else {
             if (!this.botListeners[type])
                 this.botListeners[type] = {};
-            this.botListeners[type][status.toString()] = method;
+            this.botListeners[type][status.tostring()] = method;
         }
     };
     return AntTelegram;
